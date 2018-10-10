@@ -65,6 +65,7 @@ var DataProvider = /** @class */ (function () {
         this.firestore = firestore;
         console.log('Hello DataProvider Provider');
     }
+    //adding a document in firebase or send error that is logged
     DataProvider.prototype.sendLocation = function (x) {
         return __awaiter(this, void 0, void 0, function () {
             var Ref, e_1;
@@ -177,6 +178,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.loadMap = function () {
         var _this = this;
+        //loads the map around current position
         this.geolocation.getCurrentPosition().then(function (position) {
             var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             var mapOptions = {
@@ -196,6 +198,7 @@ var HomePage = /** @class */ (function () {
         this.locationTracker.stopTracking();
     };
     HomePage.prototype.addMarker = function () {
+        //adds marker at current position and center the map
         var marker = new google.maps.Marker({
             map: this.map,
             animation: google.maps.Animation.DROP,
@@ -263,8 +266,9 @@ var LocationTracker = /** @class */ (function () {
         this.time = 0;
     }
     LocationTracker.prototype.startTracking = function () {
-        // Foreground Tracking
         var _this = this;
+        // Foreground Tracking
+        //options for how often watch checks the positions 
         var options = {
             frequency: 200,
             enableHighAccuracy: true
@@ -294,6 +298,7 @@ var LocationTracker = /** @class */ (function () {
     };
     LocationTracker.prototype.stopTracking = function () {
         var _this = this;
+        //unsubscribes from watch to stop tracking and resets lat and lng
         console.log('stopTracking');
         this.zone.run(function () {
             _this.lat = 0;
